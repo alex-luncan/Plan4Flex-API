@@ -1,0 +1,667 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Vehicle Domain",
+    "description": "The Vehicle domain deals with data related to the vehicles of the employment agency. These are the vehicles the agency can use to transport their employees to their work locations.",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "{host}/{tenant}/Vehicles/v1",
+      "variables": {
+        "host": {
+          "default": "https://api-plan4flex.micros.nl"
+        },
+        "tenant": {
+          "default": "NO_TENANT_SET"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/AdditionType": {
+      "get": {
+        "tags": [
+          "AdditionType"
+        ],
+        "summary": "GET - AdditionType",
+        "operationId": "GET_AdditionType",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Vehicles.AdditionType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Vehicle/{id}": {
+      "get": {
+        "tags": [
+          "Vehicle"
+        ],
+        "summary": "GET - Vehicle/{id}",
+        "operationId": "GET_Vehicle/{id}",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vehicles.Vehicle"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Vehicle/Vehicle": {
+      "post": {
+        "tags": [
+          "Vehicle"
+        ],
+        "summary": "POST - Vehicle/Vehicle",
+        "operationId": "POST_Vehicle/Vehicle",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Vehicles.Vehicle"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Vehicles.Vehicle"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Vehicle/Vehicle/{id}": {
+      "patch": {
+        "tags": [
+          "Vehicle"
+        ],
+        "summary": "PATCH - Vehicle/Vehicle/{id}",
+        "operationId": "PATCH_Vehicle/Vehicle/{id}",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Operation<Vehicles.Vehicle>"
+                },
+                "description": "Please refer to the [JSON Patch](https://jsonpatch.com/) documentation for more details."
+              },
+              "example": "[{ \"op\": \"test\", \"path\": \"/LicensePlate\", \"value\": \"old value\" },{ \"op\": \"replace\", \"path\": \"/LicensePlate\", \"value\": \"new value\" }]"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/VehicleContractType": {
+      "get": {
+        "tags": [
+          "VehicleContractType"
+        ],
+        "summary": "GET - VehicleContractType",
+        "operationId": "GET_VehicleContractType",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Vehicles.VehicleContractType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/VehicleFuelType": {
+      "get": {
+        "tags": [
+          "VehicleFuelType"
+        ],
+        "summary": "GET - VehicleFuelType",
+        "operationId": "GET_VehicleFuelType",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Vehicles.VehicleFuelType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/VehicleStatus": {
+      "get": {
+        "tags": [
+          "VehicleStatus"
+        ],
+        "summary": "GET - VehicleStatus",
+        "operationId": "GET_VehicleStatus",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Vehicles.VehicleStatus"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/VehicleType": {
+      "get": {
+        "tags": [
+          "VehicleType"
+        ],
+        "summary": "GET - VehicleType",
+        "operationId": "GET_VehicleType",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Vehicles.VehicleType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          },
+          "errors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Errors that occurred during the request",
+            "nullable": true
+          },
+          "trace": {
+            "type": "string",
+            "description": "The trace id of the request, we can use this to trace the request through the system",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { },
+        "description": "The standard error response for the API"
+      },
+      "JsonPatchDocument<Vehicles.Vehicle>": {
+        "type": "object",
+        "properties": {
+          "operations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Operation<Vehicles.Vehicle>"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Operation<Vehicles.Vehicle>": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
+          "op": {
+            "type": "string",
+            "nullable": true
+          },
+          "from": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Vehicles.AdditionType": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "[WIKI]\r\n<seealso cref=\"!:StandaardBijtelling.Id\" />",
+            "format": "int32",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "[WIKI]\r\n<seealso cref=\"!:StandaardBijtelling.Omschrijving\" />",
+            "nullable": true
+          },
+          "percentage": {
+            "type": "number",
+            "description": "[WIKI]\r\n<seealso cref=\"!:StandaardBijtelling.Percentage\" />",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The DTO for the DBO !:StandaardBijtelling"
+      },
+      "Vehicles.Vehicle": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The P4F id of the vehicle",
+            "format": "int32",
+            "readOnly": true
+          },
+          "licensePlate": {
+            "type": "string",
+            "description": "The license plate of the vehicle",
+            "nullable": true
+          },
+          "numberOfSeats": {
+            "type": "integer",
+            "description": "Number of seats including the driver's seat",
+            "format": "int32"
+          },
+          "brand": {
+            "type": "string",
+            "description": "The name of the brand of the vehicle",
+            "nullable": true
+          },
+          "model": {
+            "type": "string",
+            "description": "The name of the model of the vehicle",
+            "nullable": true
+          },
+          "vehicleTypeId": {
+            "type": "integer",
+            "description": "The P4F identifier to the VehicleType",
+            "format": "int32"
+          },
+          "statusId": {
+            "type": "integer",
+            "description": "The P4F identifier to the VehicleStatus",
+            "format": "int32",
+            "nullable": true
+          },
+          "fuelTypeId": {
+            "type": "integer",
+            "description": "The P4F identifier to the VehicleFuelType",
+            "format": "int32",
+            "nullable": true
+          },
+          "fiscalValue": {
+            "type": "number",
+            "description": "The value of the vehicle for tax purposes in Euros.\r\nFor The Netherlands, this is the value of the vehicle when it was new, including VAT and BPM.",
+            "format": "double"
+          },
+          "apkDate": {
+            "type": "string",
+            "description": "The date the vehicle needs to undergo its next inspection.",
+            "format": "date",
+            "nullable": true
+          },
+          "additionTypeId": {
+            "type": "integer",
+            "description": "The P4F identifier to the AdditionType",
+            "format": "int32",
+            "nullable": true
+          },
+          "driverName": {
+            "type": "string",
+            "description": "The name of the driver, only used for cars that are used by staff.",
+            "nullable": true
+          },
+          "referenceNumber": {
+            "type": "integer",
+            "description": "A unique identifiable number.",
+            "format": "int32",
+            "nullable": true
+          },
+          "comment": {
+            "type": "string",
+            "description": "Additional comments about the vehicle.",
+            "nullable": true
+          },
+          "accountManagerId": {
+            "type": "integer",
+            "description": "The P4F identifier to the AccountManager",
+            "format": "int32",
+            "nullable": true
+          },
+          "intercedentId": {
+            "type": "integer",
+            "description": "The P4F identifier to the Intercedent",
+            "format": "int32",
+            "nullable": true
+          },
+          "importid": {
+            "type": "string",
+            "description": "Additional info that can be used by 3rd party systems to link to their own data.",
+            "nullable": true
+          },
+          "dateFirstRegistrationNL": {
+            "type": "string",
+            "description": "The date the vehicle was first registered in The Netherlands.",
+            "format": "date",
+            "nullable": true
+          },
+          "dateFirstAuthorisation": {
+            "type": "string",
+            "description": "The date the vehicle was first authorised. This can differ from the DateFirstRegistrationNL if the vehicle was\r\npreviously registered in another country.",
+            "format": "date",
+            "nullable": true
+          },
+          "dateAscription": {
+            "type": "string",
+            "description": "The date of ascription of the vehicle. This is the date the vehicle was built.",
+            "format": "date",
+            "nullable": true
+          },
+          "carbonEmission": {
+            "type": "number",
+            "description": "The CO2 emission of the vehicle in grams per kilometer, measured according to the NEDC standard.",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A vehicle registered in P4F"
+      },
+      "Vehicles.VehicleContractType": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "[WIKI]\r\n<seealso cref=\"!:VoertuigenContractVorm.Id\" />",
+            "format": "int32",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "[WIKI]\r\n<seealso cref=\"!:VoertuigenContractVorm.Omschrijving\" />",
+            "nullable": true
+          },
+          "leaseDetailsRequired": {
+            "type": "boolean",
+            "description": "Whether or not the contract type is bound to a lease company.\r\n<seealso cref=\"!:VoertuigenContractVorm.MaatschappijGebonden\" />"
+          },
+          "endDateRequired": {
+            "type": "boolean",
+            "description": "[WIKI]\r\n<seealso cref=\"!:VoertuigenContractVorm.EinddatumVerplicht\" />"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The DTO for the DBO !:VoertuigenContractVorm"
+      },
+      "Vehicles.VehicleFuelType": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "[WIKI]\r\n<seealso cref=\"!:VoertuigBrandstof.Id\" />",
+            "format": "int32",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "[WIKI]\r\n<seealso cref=\"!:VoertuigBrandstof.Omschrijving\" />",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The DTO for the DBO !:VoertuigBrandstof"
+      },
+      "Vehicles.VehicleStatus": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "[WIKI]\r\n<seealso cref=\"!:VoertuigStatus.Id\" />",
+            "format": "int32",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "[WIKI]\r\n<seealso cref=\"!:VoertuigStatus.Omschrijving\" />",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The DTO for the DBO !:VoertuigStatus"
+      },
+      "Vehicles.VehicleType": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "motorized": {
+            "type": "boolean"
+          },
+          "driverPlanning": {
+            "type": "boolean"
+          },
+          "passengerPlanning": {
+            "type": "boolean"
+          },
+          "registrationOnly": {
+            "type": "boolean"
+          },
+          "calculateExpenses": {
+            "type": "boolean"
+          },
+          "onlyDayPlanning": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "The authorization header. This should be passed with value \"bearer &lt;token&gt;\". The token can be obtained through the Users Domain. See also the Getting Started page.",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}
