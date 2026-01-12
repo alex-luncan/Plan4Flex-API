@@ -1,0 +1,5683 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Employment Domain",
+    "description": "The Employment Domain deals with all data regarding the employment of the employees of theemployment agency. This includes the management of the employees, their contracts, and theirworking hours. (Note that 'employees' should not be confused with the management employees at the employment agency, which are managed in the Users Domain.)",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "{host}/{tenant}/Employment/v1",
+      "variables": {
+        "host": {
+          "default": "https://api-plan4flex.micros.nl"
+        },
+        "tenant": {
+          "default": "NO_TENANT_SET"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/CandidateEmployee/{id}": {
+      "get": {
+        "tags": [
+          "CandidateEmployee"
+        ],
+        "summary": "Gets a Data.Employment.Grpc.Interface.Dto.CandidateEmployee by id.",
+        "operationId": "GET_CandidateEmployee/{id}",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employment.CandidateEmployeeWithAddress"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "CandidateEmployee"
+        ],
+        "summary": "Update an employee",
+        "operationId": "PATCH_CandidateEmployee/{id}",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the candidate employee",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Operation<CreateCandidateEmployee>"
+                },
+                "description": "Please refer to the [JSON Patch](https://jsonpatch.com/) documentation for more details."
+              },
+              "example": "[{ \"op\": \"test\", \"path\": \"/SourceId\", \"value\": \"old value\" },{ \"op\": \"replace\", \"path\": \"/SourceId\", \"value\": \"new value\" }]"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CandidateEmployee": {
+      "post": {
+        "tags": [
+          "CandidateEmployee"
+        ],
+        "summary": "Creates a new Data.Employment.Grpc.Interface.Dto.CandidateEmployee.",
+        "operationId": "POST_CandidateEmployee",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Employment.CreateCandidateEmployeeWithAddress"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Employment.CreateCandidateEmployeeWithAddress"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CandidateEmployeeBankAccount/{candidateEmployeeId}": {
+      "get": {
+        "tags": [
+          "CandidateEmployeeBankAccount"
+        ],
+        "summary": "Retrieve all Data.Employment.Grpc.Interface.Dto.CandidateEmployeeBankAccount for given CandidateEmployee",
+        "operationId": "GET_CandidateEmployeeBankAccount/{candidateEmployeeId}",
+        "parameters": [
+          {
+            "name": "candidateEmployeeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CandidateEmployeeEducation"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CandidateEmployeeBankAccount": {
+      "post": {
+        "tags": [
+          "CandidateEmployeeBankAccount"
+        ],
+        "summary": "Creates a new Data.Employment.Grpc.Interface.Dto.CandidateEmployeeBankAccount if none exists already.",
+        "operationId": "POST_CandidateEmployeeBankAccount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CandidateEmployeeBankAccount"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CandidateEmployeeBankAccount"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CandidateEmployeeBankAccount/{id}": {
+      "patch": {
+        "tags": [
+          "CandidateEmployeeBankAccount"
+        ],
+        "summary": "Update a existing Data.Employment.Grpc.Interface.Dto.CandidateEmployeeBankAccount.",
+        "operationId": "PATCH_CandidateEmployeeBankAccount/{id}",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Operation<CandidateEmployeeBankAccount>"
+                },
+                "description": "Please refer to the [JSON Patch](https://jsonpatch.com/) documentation for more details."
+              },
+              "example": "[{ \"op\": \"test\", \"path\": \"/CandidateId\", \"value\": \"old value\" },{ \"op\": \"replace\", \"path\": \"/CandidateId\", \"value\": \"new value\" }]"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CandidateEmployeeDocument/DocumentTypes": {
+      "get": {
+        "tags": [
+          "CandidateEmployeeDocument"
+        ],
+        "summary": "Gets all P4FService.Grpc.Shared.CommonDtos.DocumentType that are available for candidate employee documents.",
+        "operationId": "GET_CandidateEmployeeDocument/DocumentTypes",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DocumentType"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-premium-api-plus": true
+      }
+    },
+    "/CandidateEmployeeDocument": {
+      "post": {
+        "tags": [
+          "CandidateEmployeeDocument"
+        ],
+        "summary": "Creates a new Data.Employment.Grpc.Interface.Dto.CreateCandidateEmployeeDocument.",
+        "operationId": "POST_CandidateEmployeeDocument",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCandidateEmployeeDocument"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCandidateEmployeeDocument"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-premium-api-plus": true
+      }
+    },
+    "/CandidateEmployeeEducation/{candidateEmployeeId}": {
+      "get": {
+        "tags": [
+          "CandidateEmployeeEducation"
+        ],
+        "summary": "Retrieve all educations for given CandidateEmployee",
+        "operationId": "GET_CandidateEmployeeEducation/{candidateEmployeeId}",
+        "parameters": [
+          {
+            "name": "candidateEmployeeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CandidateEmployeeEducation"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CandidateEmployeeEducation": {
+      "post": {
+        "tags": [
+          "CandidateEmployeeEducation"
+        ],
+        "summary": "POST - CandidateEmployeeEducation",
+        "operationId": "POST_CandidateEmployeeEducation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CandidateEmployeeEducation"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CandidateEmployeeEducation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CandidateEmployeeEducation/{id}": {
+      "patch": {
+        "tags": [
+          "CandidateEmployeeEducation"
+        ],
+        "summary": "PATCH - CandidateEmployeeEducation/{id}",
+        "operationId": "PATCH_CandidateEmployeeEducation/{id}",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Operation<CandidateEmployeeEducation>"
+                },
+                "description": "Please refer to the [JSON Patch](https://jsonpatch.com/) documentation for more details."
+              },
+              "example": "[{ \"op\": \"test\", \"path\": \"/CandidateId\", \"value\": \"old value\" },{ \"op\": \"replace\", \"path\": \"/CandidateId\", \"value\": \"new value\" }]"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CandidateEmployeeStatus": {
+      "get": {
+        "tags": [
+          "CandidateEmployeeStatus"
+        ],
+        "summary": "Retrieve all candidateEmployee statuses.",
+        "operationId": "GET_CandidateEmployeeStatus",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CandidateEmployeeStatus"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CandidateEmployeeTrait/{candidateEmployeeId}": {
+      "get": {
+        "tags": [
+          "CandidateEmployeeTrait"
+        ],
+        "summary": "Retrieve all traits for given CandidateEmployee",
+        "operationId": "GET_CandidateEmployeeTrait/{candidateEmployeeId}",
+        "parameters": [
+          {
+            "name": "candidateEmployeeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CandidateEmployeeTrait"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CandidateEmployeeTrait": {
+      "post": {
+        "tags": [
+          "CandidateEmployeeTrait"
+        ],
+        "summary": "POST - CandidateEmployeeTrait",
+        "operationId": "POST_CandidateEmployeeTrait",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CandidateEmployeeTrait"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CandidateEmployeeTrait"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CandidateEmployeeTrait/{id}": {
+      "patch": {
+        "tags": [
+          "CandidateEmployeeTrait"
+        ],
+        "summary": "PATCH - CandidateEmployeeTrait/{id}",
+        "operationId": "PATCH_CandidateEmployeeTrait/{id}",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Operation<CandidateEmployeeTrait>"
+                },
+                "description": "Please refer to the [JSON Patch](https://jsonpatch.com/) documentation for more details."
+              },
+              "example": "[{ \"op\": \"test\", \"path\": \"/CandidateId\", \"value\": \"old value\" },{ \"op\": \"replace\", \"path\": \"/CandidateId\", \"value\": \"new value\" }]"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CandidateEmployeeWorkExperience/{candidateEmployeeId}": {
+      "get": {
+        "tags": [
+          "CandidateEmployeeWorkExperience"
+        ],
+        "summary": "Retrieve all Data.Employment.Grpc.Interface.Dto.CandidateEmployeeWorkExperience for given CandidateEmployee",
+        "operationId": "GET_CandidateEmployeeWorkExperience/{candidateEmployeeId}",
+        "parameters": [
+          {
+            "name": "candidateEmployeeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CandidateEmployeeWorkExperience"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CandidateEmployeeWorkExperience": {
+      "post": {
+        "tags": [
+          "CandidateEmployeeWorkExperience"
+        ],
+        "summary": "Creates a new Data.Employment.Grpc.Interface.Dto.CandidateEmployeeWorkExperience if none exists already.",
+        "operationId": "POST_CandidateEmployeeWorkExperience",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CandidateEmployeeWorkExperience"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CandidateEmployeeWorkExperience"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CandidateEmployeeWorkExperience/{id}": {
+      "patch": {
+        "tags": [
+          "CandidateEmployeeWorkExperience"
+        ],
+        "summary": "Update a existing Data.Employment.Grpc.Interface.Dto.CandidateEmployeeWorkExperience.",
+        "operationId": "PATCH_CandidateEmployeeWorkExperience/{id}",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Operation<CandidateEmployeeWorkExperience>"
+                },
+                "description": "Please refer to the [JSON Patch](https://jsonpatch.com/) documentation for more details."
+              },
+              "example": "[{ \"op\": \"test\", \"path\": \"/CandidateId\", \"value\": \"old value\" },{ \"op\": \"replace\", \"path\": \"/CandidateId\", \"value\": \"new value\" }]"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CaoRisicogroup": {
+      "get": {
+        "tags": [
+          "CaoRisicogroup"
+        ],
+        "summary": "Retrieve all Cao Risigroupen",
+        "operationId": "GET_CaoRisicogroup",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CaoRisicogroup"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Contract/{id}": {
+      "get": {
+        "tags": [
+          "Contract"
+        ],
+        "summary": "GET - Contract/{id}",
+        "operationId": "GET_Contract/{id}",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contract"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Contract"
+        ],
+        "summary": "PATCH - Contract/{id}",
+        "operationId": "PATCH_Contract/{id}",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Operation<Contract>"
+                },
+                "description": "Please refer to the [JSON Patch](https://jsonpatch.com/) documentation for more details."
+              },
+              "example": "[{ \"op\": \"test\", \"path\": \"/OuId\", \"value\": \"old value\" },{ \"op\": \"replace\", \"path\": \"/OuId\", \"value\": \"new value\" }]"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Contract": {
+      "get": {
+        "tags": [
+          "Contract"
+        ],
+        "summary": "GET - Contract",
+        "operationId": "GET_Contract",
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "schema": {
+              "maximum": 1000,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32",
+              "default": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResult<Contract>"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Contract"
+        ],
+        "summary": "POST - Contract",
+        "operationId": "POST_Contract",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Contract"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Contract"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ContractTypes": {
+      "get": {
+        "tags": [
+          "ContractTypes"
+        ],
+        "summary": "Retrieve all Contract types",
+        "operationId": "GET_ContractTypes",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContractType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Employee/{id}": {
+      "get": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "GET - Employee/{id}",
+        "operationId": "GET_Employee/{id}",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employment.EmployeeWithAddress"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Update an employee",
+        "operationId": "PATCH_Employee/{id}",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the employee",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Operation<UpdateEmployee>"
+                },
+                "description": "Please refer to the [JSON Patch](https://jsonpatch.com/) documentation for more details."
+              },
+              "example": "[{ \"op\": \"test\", \"path\": \"/StatusId\", \"value\": \"old value\" },{ \"op\": \"replace\", \"path\": \"/StatusId\", \"value\": \"new value\" }]"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Employee/{employeeId}/Contracts": {
+      "get": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "GET - Employee/{employeeId}/Contracts",
+        "operationId": "GET_Employee/{employeeId}/Contracts",
+        "parameters": [
+          {
+            "name": "employeeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Contract"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Employee": {
+      "post": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "POST - Employee",
+        "operationId": "POST_Employee",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Employment.CreateEmployeeWithAddress"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Employment.CreateEmployeeWithAddress"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/EmployeeAvailability/ForDate": {
+      "get": {
+        "tags": [
+          "EmployeeAvailability"
+        ],
+        "summary": "GET - EmployeeAvailability/ForDate",
+        "operationId": "GET_EmployeeAvailability/ForDate",
+        "parameters": [
+          {
+            "name": "employeeId",
+            "in": "query",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Required dateformat: YYYY-MM-DD",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeAvailability"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/EmployeeAvailability/NextFromDate": {
+      "get": {
+        "tags": [
+          "EmployeeAvailability"
+        ],
+        "summary": "GET - EmployeeAvailability/NextFromDate",
+        "operationId": "GET_EmployeeAvailability/NextFromDate",
+        "parameters": [
+          {
+            "name": "employeeId",
+            "in": "query",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Required dateformat: YYYY-MM-DD",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeAvailability"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/EmployeeAvailability": {
+      "get": {
+        "tags": [
+          "EmployeeAvailability"
+        ],
+        "summary": "GET - EmployeeAvailability",
+        "operationId": "GET_EmployeeAvailability",
+        "parameters": [
+          {
+            "name": "employeeId",
+            "in": "query",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EmployeeAvailability"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/EmployeeAvailability/{employeeAvailabilityId}": {
+      "get": {
+        "tags": [
+          "EmployeeAvailability"
+        ],
+        "summary": "GET - EmployeeAvailability/{employeeAvailabilityId}",
+        "operationId": "GET_EmployeeAvailability/{employeeAvailabilityId}",
+        "parameters": [
+          {
+            "name": "employeeAvailabilityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeAvailability"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/EmployeeBankAccounts": {
+      "get": {
+        "tags": [
+          "EmployeeBankAccounts"
+        ],
+        "summary": "Retrieve all employee bankaccounts.",
+        "operationId": "GET_EmployeeBankAccounts",
+        "parameters": [
+          {
+            "name": "employeeId",
+            "in": "query",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EmployeeBankAccount"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/EmployeeDocument/DocumentTypes": {
+      "get": {
+        "tags": [
+          "EmployeeDocument"
+        ],
+        "summary": "Gets all document types that are available for employee documents.",
+        "operationId": "GET_EmployeeDocument/DocumentTypes",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DocumentType"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-premium-api-plus": true
+      }
+    },
+    "/EmployeeDocument": {
+      "post": {
+        "tags": [
+          "EmployeeDocument"
+        ],
+        "summary": "Creates a new employee document.",
+        "operationId": "POST_EmployeeDocument",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEmployeeDocument"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEmployeeDocument"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-premium-api-plus": true
+      }
+    },
+    "/EmployeeExtraFields": {
+      "get": {
+        "tags": [
+          "EmployeeExtraFields"
+        ],
+        "summary": "GET - EmployeeExtraFields",
+        "operationId": "GET_EmployeeExtraFields",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExtraField"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/EmployeeIncomeGuarantee": {
+      "get": {
+        "tags": [
+          "EmployeeIncomeGuarantee"
+        ],
+        "summary": "Retrieve all employee income guarantees.",
+        "operationId": "GET_EmployeeIncomeGuarantee",
+        "parameters": [
+          {
+            "name": "employeeId",
+            "in": "query",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EmployeeIncomeGuarantee"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/EmployeePhoneNumbers/{employeeId}": {
+      "get": {
+        "tags": [
+          "EmployeePhoneNumbers"
+        ],
+        "summary": "GET - EmployeePhoneNumbers/{employeeId}",
+        "operationId": "GET_EmployeePhoneNumbers/{employeeId}",
+        "parameters": [
+          {
+            "name": "employeeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PhoneNumber"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/EmployeeStatus": {
+      "get": {
+        "tags": [
+          "EmployeeStatus"
+        ],
+        "summary": "Retrieve all employee statuses.",
+        "operationId": "GET_EmployeeStatus",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EmployeeStatus"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/IdDocumentType": {
+      "get": {
+        "tags": [
+          "IdDocumentType"
+        ],
+        "summary": "Retrieve all id document types.",
+        "operationId": "GET_IdDocumentType",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IdDocumentType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MaritalStatus": {
+      "get": {
+        "tags": [
+          "MaritalStatus"
+        ],
+        "summary": "Retrieve all marital statuses.",
+        "operationId": "GET_MaritalStatus",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MaritalStatus"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ReasonContractTermination": {
+      "get": {
+        "tags": [
+          "ReasonContractTermination"
+        ],
+        "summary": "Retrieve all Cao Risigroupen",
+        "operationId": "GET_ReasonContractTermination",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReasonContractTermination"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Recruiter": {
+      "get": {
+        "tags": [
+          "Recruiter"
+        ],
+        "summary": "Retrieve all recruiters.",
+        "operationId": "GET_Recruiter",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Employment.RecruiterWithAddress"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/RecruitmentLocation": {
+      "get": {
+        "tags": [
+          "RecruitmentLocation"
+        ],
+        "summary": "Retrieve all recruitment locations.",
+        "operationId": "GET_RecruitmentLocation",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Employment.RecruitmentLocationWithAddress"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/RecruitmentLocation/{id}": {
+      "get": {
+        "tags": [
+          "RecruitmentLocation"
+        ],
+        "summary": "Retrieve a recruitment location by its id.",
+        "operationId": "GET_RecruitmentLocation/{id}",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employment.RecruitmentLocationWithAddress"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/TraitElement/{id}": {
+      "get": {
+        "tags": [
+          "TraitElement"
+        ],
+        "summary": "Retrieve trait element for given id",
+        "operationId": "GET_TraitElement/{id}",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TraitElement"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/TraitElement": {
+      "get": {
+        "tags": [
+          "TraitElement"
+        ],
+        "summary": "Retrieve all trait elements.",
+        "operationId": "GET_TraitElement",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TraitElement"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/TraitGroup/{id}": {
+      "get": {
+        "tags": [
+          "TraitGroup"
+        ],
+        "summary": "Retrieve trait group for given id",
+        "operationId": "GET_TraitGroup/{id}",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TraitGroup"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/TraitGroup": {
+      "get": {
+        "tags": [
+          "TraitGroup"
+        ],
+        "summary": "Retrieve all trait groups.",
+        "operationId": "GET_TraitGroup",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TraitGroup"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/TraitValue": {
+      "get": {
+        "tags": [
+          "TraitValue"
+        ],
+        "summary": "Retrieve all trait values.",
+        "operationId": "GET_TraitValue",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TraitValue"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Vacancy/{id}": {
+      "get": {
+        "tags": [
+          "Vacancy"
+        ],
+        "summary": "GET - Vacancy/{id}",
+        "operationId": "GET_Vacancy/{id}",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vacancy"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Vacancy/Profile": {
+      "get": {
+        "tags": [
+          "Vacancy"
+        ],
+        "summary": "Retrieve a profile for given vacancy",
+        "operationId": "GET_Vacancy/Profile",
+        "parameters": [
+          {
+            "name": "vacancyId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VacancyProfile"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Vacancy": {
+      "get": {
+        "tags": [
+          "Vacancy"
+        ],
+        "summary": "Paginated endpoint for getting vacancies.",
+        "operationId": "GET_Vacancy",
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The offset from the start of the list, defaults to 0. Minimum value is 0.",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "description": "The amount of vacancies to return; defaults to 100; min 1; max 1000.",
+            "schema": {
+              "maximum": 1000,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32",
+              "default": 100
+            }
+          },
+          {
+            "name": "changesSince",
+            "in": "query",
+            "description": "An optional datetime to be passed along. When passed, only items that have been changed since the given datetime are returned. The time should be passed as UTC.<br/><br/>Required dateformat: YYYY-MM-DDThh:mm:ss.sss",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResult<Vacancy>"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Vacancy/LinkedCandidates": {
+      "get": {
+        "tags": [
+          "Vacancy"
+        ],
+        "summary": "If a vacancy exists for vacancyId, returns an OK 200 response with a Data.Employment.Grpc.Interface.Dto.VacancyLinkedCandidate object.",
+        "operationId": "GET_Vacancy/LinkedCandidates",
+        "parameters": [
+          {
+            "name": "vacancyId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VacancyLinkedCandidate"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Vacancy/Traits/{vacancyId}": {
+      "get": {
+        "tags": [
+          "Vacancy"
+        ],
+        "summary": "Retrieve all traits for given vacancy",
+        "operationId": "GET_Vacancy/Traits/{vacancyId}",
+        "parameters": [
+          {
+            "name": "vacancyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VacancyTrait"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/VacancyStatus": {
+      "get": {
+        "tags": [
+          "VacancyStatus"
+        ],
+        "summary": "Retrieve all vacancy statuses.",
+        "operationId": "GET_VacancyStatus",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VacancyStatus"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Address": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "streetName": {
+            "type": "string",
+            "nullable": true
+          },
+          "houseNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "houseNumberSuffix": {
+            "type": "string",
+            "nullable": true
+          },
+          "postalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "mobilePhoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "faxNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "string",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "string",
+            "nullable": true
+          },
+          "geocodeStatus": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Age": {
+        "type": "object",
+        "properties": {
+          "min": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "max": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ArchivedFlag": {
+        "enum": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "CandidateEmployeeBankAccount": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The Plan4Flex primary key Id of the database entity",
+            "format": "int32",
+            "readOnly": true
+          },
+          "candidateId": {
+            "type": "integer",
+            "description": "The id of the linked candidate",
+            "format": "int32"
+          },
+          "bankAccountNumber": {
+            "type": "string",
+            "description": "The bank account number",
+            "nullable": true
+          },
+          "bankIdentificationCode": {
+            "type": "string",
+            "description": "The Bank identifaction code (BIC)",
+            "nullable": true
+          },
+          "inNameOf": {
+            "type": "string",
+            "description": "In name of. The holder/owner of the bank account",
+            "nullable": true
+          },
+          "inNameOfLocation": {
+            "type": "string",
+            "description": "In name of location",
+            "nullable": true
+          },
+          "countryId": {
+            "type": "integer",
+            "description": "The id of the linked country.",
+            "format": "int32",
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "description": "the date of the start of the bank account",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "the end of the bank account.",
+            "format": "date",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The bankaccount of a CandidateEmployee"
+      },
+      "CandidateEmployeeEducation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The Plan4Flex primary key Id of the database entity",
+            "format": "int32",
+            "readOnly": true
+          },
+          "candidateId": {
+            "type": "integer",
+            "description": "The unique identifier of the candidate the education belongs to.",
+            "format": "int32"
+          },
+          "educationName": {
+            "type": "string",
+            "description": "The name of the education",
+            "nullable": true
+          },
+          "institutionName": {
+            "type": "string",
+            "description": "The name of the institute of the education",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "description": "The name of the city of the institute of the education",
+            "nullable": true
+          },
+          "countryId": {
+            "type": "integer",
+            "description": "The country of the institute of the education",
+            "format": "int32",
+            "nullable": true
+          },
+          "startYear": {
+            "type": "integer",
+            "description": "The start year of the education",
+            "format": "int32",
+            "nullable": true
+          },
+          "endYear": {
+            "type": "integer",
+            "description": "The end year of the education",
+            "format": "int32",
+            "nullable": true
+          },
+          "hasAchievedDiploma": {
+            "type": "boolean",
+            "description": "Indicator for achieving a diploma for this education",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "An Education of a CandidateEmployee."
+      },
+      "CandidateEmployeeStatus": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The Plan4Flex primary key Id of the database entity",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the status.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The status of an candidate employee"
+      },
+      "CandidateEmployeeTrait": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The Plan4Flex primary key Id of the database entity",
+            "format": "int32",
+            "readOnly": true
+          },
+          "candidateId": {
+            "type": "integer",
+            "description": "The unique identifier of the candidate the trait belongs to.",
+            "format": "int32"
+          },
+          "traitElementId": {
+            "type": "integer",
+            "description": "The unique identifier of the element of the trait.",
+            "format": "int32"
+          },
+          "traitValueId": {
+            "type": "integer",
+            "description": "The unique identifier of the value of the trait.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A trait of a CandidateEmployee."
+      },
+      "CandidateEmployeeWorkExperience": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The Plan4Flex primary key Id of the database entity",
+            "format": "int32",
+            "readOnly": true
+          },
+          "candidateId": {
+            "type": "integer",
+            "description": "The id of the linked candidate where this work experience is from.",
+            "format": "int32"
+          },
+          "organizationName": {
+            "type": "string",
+            "description": "The name of the organization where the work experience is gained.",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "description": "The city/place where the work experience is gained.",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "The phone number of the organization where this work experience is gained.",
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "description": "The start date",
+            "format": "date",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "description": "The end date",
+            "format": "date",
+            "nullable": true
+          },
+          "activities": {
+            "type": "string",
+            "description": "The work activities summary",
+            "nullable": true
+          },
+          "departureReason": {
+            "type": "string",
+            "description": "The reason of departure",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The work experience of a candidate employee."
+      },
+      "CaoRisicogroup": {
+        "required": [
+          "name",
+          "sectorName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sectorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "exportCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Contract": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The unique identifier of the contract.",
+            "format": "int32",
+            "readOnly": true
+          },
+          "ouId": {
+            "type": "integer",
+            "description": "The unique identifier of the organization unit the contract belongs to.",
+            "format": "int32",
+            "nullable": true
+          },
+          "startOfContract": {
+            "type": "string",
+            "description": "The date of the start of the contract period",
+            "format": "date"
+          },
+          "endOfContract": {
+            "type": "string",
+            "description": "The nullable date of the end of the contract period. When the contract is indefinite, this is null.",
+            "format": "date",
+            "nullable": true
+          },
+          "hourlyRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "weeklyRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "employeeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hoursADay": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "daysPerWeek": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "vaccationAccumulationRate": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "accumulatesHoliday": {
+            "type": "boolean"
+          },
+          "importid": {
+            "type": "string",
+            "nullable": true
+          },
+          "typeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "definedAsNew": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "reasonContractTerminationId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "noteContractTermination": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A contract of an employee."
+      },
+      "ContractType": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "description": "De naam van het contracttype",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Een omschrijving van het contracttype",
+            "nullable": true
+          },
+          "exportcode": {
+            "type": "string",
+            "description": "De exportcode van het contracttype",
+            "nullable": true
+          },
+          "salaryPeriode": {
+            "type": "integer",
+            "description": "De verloningsperiode, 1=wekelijks, 2=vierwekelijks",
+            "format": "int32"
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Geeft aan of het contracttype gearchiveerd is en niet meer aan contracten mag worden toegekend"
+          },
+          "daysWeekly": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "hoursWeekly": {
+            "type": "number",
+            "description": "Het default aantal uren per week voor contracten van dit type",
+            "format": "double",
+            "nullable": true
+          },
+          "hourlyRate": {
+            "type": "number",
+            "description": "Het default uurloon voor contracten van dit type",
+            "format": "double",
+            "nullable": true
+          },
+          "contractDuration": {
+            "type": "integer",
+            "description": "De default contractduur voor contracten van dit type",
+            "format": "int32",
+            "nullable": true
+          },
+          "contractPeriodeUnit": {
+            "type": "integer",
+            "description": "De eenheid waarin de default contractduur wordt uitgedrukt (1=dag, 2=week, 3=maand, 4=jaar, 5=onbepaalde tijd)",
+            "format": "int32",
+            "nullable": true
+          },
+          "definedAsNew": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isOnCallContract": {
+            "type": "boolean"
+          },
+          "phaseCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "phaseCodeSeperate": {
+            "type": "string",
+            "nullable": true
+          },
+          "temporyEmploymentClause": {
+            "type": "string",
+            "nullable": true
+          },
+          "placementType": {
+            "type": "string",
+            "nullable": true
+          },
+          "temporyEmploymentMode": {
+            "type": "string",
+            "nullable": true
+          },
+          "automaticallyTransferReservations": {
+            "type": "boolean",
+            "description": "Reserveringen automatisch overhevelen na einde plaatsing",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateCandidateEmployeeDocument": {
+        "required": [
+          "data",
+          "fileName"
+        ],
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string",
+            "description": "The name of the file. This should not be empty, and include a file extension.",
+            "nullable": true
+          },
+          "entityId": {
+            "type": "integer",
+            "description": "The id of the entity this document belongs to. This can be an employee, a branch, etc. depending on the endpoint\r\nused to create the document.",
+            "format": "int32"
+          },
+          "documentTypeId": {
+            "type": "integer",
+            "description": "The ID of the document type",
+            "format": "int32"
+          },
+          "createdDate": {
+            "type": "string",
+            "description": "The date the document was created. If null, the current date will be used.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "expirationDate": {
+            "type": "string",
+            "description": "The date the document expires. If null, the document will not expire.",
+            "format": "date",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "An optional description of the document",
+            "nullable": true
+          },
+          "isPublic": {
+            "type": "boolean",
+            "description": "Whether the document is public. If true, the document can be viewed by employees. If false, the document can only\r\nbe viewed by the employment agency. If not set, the default value of the document type will be used.",
+            "nullable": true
+          },
+          "data": {
+            "type": "string",
+            "description": "The binary data of the document file.",
+            "format": "byte",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "DTO for creating an candidate employee document"
+      },
+      "CreateEmployeeDocument": {
+        "required": [
+          "data",
+          "fileName"
+        ],
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string",
+            "description": "The name of the file. This should not be empty, and include a file extension.",
+            "nullable": true
+          },
+          "entityId": {
+            "type": "integer",
+            "description": "The id of the entity this document belongs to. This can be an employee, a branch, etc. depending on the endpoint\r\nused to create the document.",
+            "format": "int32"
+          },
+          "documentTypeId": {
+            "type": "integer",
+            "description": "The ID of the document type",
+            "format": "int32"
+          },
+          "createdDate": {
+            "type": "string",
+            "description": "The date the document was created. If null, the current date will be used.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "expirationDate": {
+            "type": "string",
+            "description": "The date the document expires. If null, the document will not expire.",
+            "format": "date",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "An optional description of the document",
+            "nullable": true
+          },
+          "isPublic": {
+            "type": "boolean",
+            "description": "Whether the document is public. If true, the document can be viewed by employees. If false, the document can only\r\nbe viewed by the employment agency. If not set, the default value of the document type will be used.",
+            "nullable": true
+          },
+          "data": {
+            "type": "string",
+            "description": "The binary data of the document file.",
+            "format": "byte",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "DTO for creating an employee document"
+      },
+      "DesiredTotals": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "male": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "female": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "withDriversLicense": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentType": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The unique identifier of the document type",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "description": "A descriptive name of the document type",
+            "nullable": true
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Whether or not the document type is archived. When it is archived, it should not be used anymore for new documents"
+          },
+          "defaultPublic": {
+            "type": "boolean",
+            "description": "Whether or not the document type is public by default. When it is public by default, new documents with this\r\ntype will be public by default."
+          }
+        },
+        "additionalProperties": false,
+        "description": "A type of document"
+      },
+      "EmployeeAvailability": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The Plan4Flex primary key Id of the database entity",
+            "format": "int32"
+          },
+          "employeeId": {
+            "type": "integer",
+            "description": "The primary key Id of the employee.",
+            "format": "int32"
+          },
+          "startDate": {
+            "type": "string",
+            "description": "The (inclusive) date on which the availability starts.",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "The (inclusive) date on which the availability ends. If this is null, the availability does not have an end date.",
+            "format": "date",
+            "nullable": true
+          },
+          "ouId": {
+            "type": "integer",
+            "description": "The organization unit Id of the availability.",
+            "format": "int32"
+          },
+          "salaryNumber": {
+            "type": "string",
+            "description": "The optional salary number of the availability.",
+            "nullable": true
+          },
+          "importId": {
+            "type": "string",
+            "description": "The optional import Id of the availability.",
+            "nullable": true
+          },
+          "endReasonId": {
+            "type": "integer",
+            "description": "The optional primary key Id to the end reason of the availability.",
+            "format": "int32",
+            "nullable": true
+          },
+          "endRemark": {
+            "type": "string",
+            "description": "An optional remark for the end of the availability.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A DTO for the availability of an employee.\r\nThis DTO indicates a link between an employee and an organization unit, with a start and end date. This DTO is the\r\nroot of many Plan4Flex entities that are related to an employee, such as most planning entities, contracts, etc."
+      },
+      "EmployeeBankAccount": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The Plan4Flex primary key Id of the database entity",
+            "format": "int32"
+          },
+          "employeeId": {
+            "type": "integer",
+            "description": "The primary key Id of the employee.",
+            "format": "int32"
+          },
+          "startDate": {
+            "type": "string",
+            "description": "The (inclusive) start date from which the bank account is valid.",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "The (inclusive) end date until which the bank account is valid.",
+            "format": "date",
+            "nullable": true
+          },
+          "bankAccountNumber": {
+            "type": "string",
+            "description": "The bank account number.",
+            "nullable": true
+          },
+          "inNameOf": {
+            "type": "string",
+            "description": "The name in which the bank account is registered.",
+            "nullable": true
+          },
+          "inNameOfLocation": {
+            "type": "string",
+            "description": "The location in which the bank account is registered.",
+            "nullable": true
+          },
+          "countryId": {
+            "type": "integer",
+            "description": "P4F Id of the country in which the bank account is registered.",
+            "format": "int32",
+            "nullable": true
+          },
+          "bankIdentificationCode": {
+            "type": "string",
+            "description": "The BIC of the bank.",
+            "nullable": true
+          },
+          "importId": {
+            "type": "string",
+            "description": "Additional import identifier for third party integrations.",
+            "nullable": true
+          },
+          "isSalaryAccount": {
+            "type": "boolean",
+            "description": "Whether the bank account is used for salary payments."
+          }
+        },
+        "additionalProperties": false,
+        "description": "A DTO for an employee bank account."
+      },
+      "EmployeeExtraFields": {
+        "type": "object",
+        "properties": {
+          "textField1": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField2": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField3": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField4": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField5": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField6": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField7": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField8": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField9": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField10": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField11": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField12": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField13": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField14": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField15": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField16": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField17": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField18": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField19": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField20": {
+            "type": "string",
+            "nullable": true
+          },
+          "dynamicFields": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmployeeIncomeGuarantee": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The Plan4Flex primary key Id of the database entity",
+            "format": "int32"
+          },
+          "employeeId": {
+            "type": "integer",
+            "description": "The primary key Id of the employee.",
+            "format": "int32"
+          },
+          "startDate": {
+            "type": "string",
+            "description": "The (inclusive) start date from which the bank account is valid.",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "The (inclusive) end date until which the bank account is valid.",
+            "format": "date"
+          },
+          "comment": {
+            "type": "string",
+            "description": "The optional comment for this income guarantee.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmployeeStatus": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Employment.CandidateEmployeeWithAddress": {
+        "required": [
+          "firstName",
+          "lastName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The unique identifier of the CandidateEmployee.",
+            "format": "int32",
+            "readOnly": true
+          },
+          "initials": {
+            "type": "string",
+            "description": "The initials of the name of the candidate employee.",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The last name of the candidate employee.",
+            "nullable": true
+          },
+          "namePrefix": {
+            "type": "string",
+            "description": "An optional prefix for the last name of the candidate employee, for example \"van der\".",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "description": "The first name of the candidate employee.",
+            "nullable": true
+          },
+          "birthName": {
+            "type": "string",
+            "description": "The name the candidate employee was born with.",
+            "nullable": true
+          },
+          "birthNamePrefix": {
+            "type": "string",
+            "description": "The prefix of the birth name of the candidate employee, for example \"van der\".",
+            "nullable": true
+          },
+          "nickname": {
+            "type": "string",
+            "description": "The name that should be used when addressing the candidate employee.",
+            "nullable": true
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "description": "The date the candidate employee was born.",
+            "format": "date"
+          },
+          "cityOfBirth": {
+            "type": "string",
+            "description": "The city or town the candidate employee was born in.",
+            "nullable": true
+          },
+          "countryOfBirthId": {
+            "type": "integer",
+            "description": "The id to the country the candidate employee was born in.",
+            "format": "int32",
+            "nullable": true
+          },
+          "genderId": {
+            "type": "integer",
+            "description": "The id of the gender of the candidate employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "maritalStatusId": {
+            "type": "integer",
+            "description": "The id to the current marital status of the candidate employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "healthInsurerId": {
+            "type": "integer",
+            "description": "The id to the health insurer of the candidate employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "healthInsuranceNumber": {
+            "type": "string",
+            "description": "The number the candidate employee is insured with at their health insurer.",
+            "nullable": true
+          },
+          "emailAddress": {
+            "type": "string",
+            "description": "The email address of the candidate employee.",
+            "nullable": true
+          },
+          "mobileNumber": {
+            "type": "string",
+            "description": "The mobile phone number of the candidate employee.",
+            "nullable": true
+          },
+          "communicationLanguageId": {
+            "type": "integer",
+            "description": "The preferred language the candidate employee should be communicated with.",
+            "format": "int32",
+            "nullable": true
+          },
+          "generalPractitionerId": {
+            "type": "integer",
+            "description": "The id of the general practitioner of the candidate employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "personalHousing": {
+            "type": "boolean",
+            "description": "Whether or not the candidate employee has their own residence within the Netherlands."
+          },
+          "usesOwnTransportation": {
+            "type": "boolean"
+          },
+          "comment": {
+            "type": "string",
+            "description": "An optional comment about the candidate employee.",
+            "nullable": true
+          },
+          "statusId": {
+            "type": "integer",
+            "description": "The id to the current status of the candidate employee, for example \"active\", \"inactive\", or \"candidate\".",
+            "format": "int32",
+            "nullable": true
+          },
+          "recruiterId": {
+            "type": "integer",
+            "description": "The id to the recruiter that recruited the candidate employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "idDocumentNumber": {
+            "type": "string",
+            "description": "The registration number of the identification document (identificationnumber)",
+            "nullable": true
+          },
+          "idDocumentTypeId": {
+            "type": "integer",
+            "description": "The P4F identifier to the kind of identity document the candidate employee uses to identify themselves.",
+            "format": "int32",
+            "nullable": true
+          },
+          "idDocumentValidUntil": {
+            "type": "string",
+            "description": "The inclusive end date for the employee's Identification document.",
+            "format": "date",
+            "nullable": true
+          },
+          "hasDriversLicense": {
+            "type": "boolean",
+            "description": "Whether or not the candidate employee has a drivers license."
+          },
+          "driversLicenseValidUntil": {
+            "type": "string",
+            "description": "The date the drivers license of the candidate employee expires.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "nationalityId": {
+            "type": "integer",
+            "description": "The id to the primary nationality the candidate employee has.",
+            "format": "int32",
+            "nullable": true
+          },
+          "fiscalResidenceId": {
+            "type": "integer",
+            "description": "The id to the country where the candidate employee is taxed.",
+            "format": "int32",
+            "nullable": true
+          },
+          "registrationDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "addressAbroad": {
+            "$ref": "#/components/schemas/Address"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Employment.CreateCandidateEmployeeWithAddress": {
+        "required": [
+          "firstName",
+          "lastName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The unique identifier of the CandidateEmployee.",
+            "format": "int32",
+            "readOnly": true
+          },
+          "initials": {
+            "type": "string",
+            "description": "The initials of the name of the candidate employee.",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The last name of the candidate employee.",
+            "nullable": true
+          },
+          "namePrefix": {
+            "type": "string",
+            "description": "An optional prefix for the last name of the candidate employee, for example \"van der\".",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "description": "The first name of the candidate employee.",
+            "nullable": true
+          },
+          "birthName": {
+            "type": "string",
+            "description": "The name the candidate employee was born with.",
+            "nullable": true
+          },
+          "birthNamePrefix": {
+            "type": "string",
+            "description": "The prefix of the birth name of the candidate employee, for example \"van der\".",
+            "nullable": true
+          },
+          "nickname": {
+            "type": "string",
+            "description": "The name that should be used when addressing the candidate employee.",
+            "nullable": true
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "description": "The date the candidate employee was born.",
+            "format": "date"
+          },
+          "cityOfBirth": {
+            "type": "string",
+            "description": "The city or town the candidate employee was born in.",
+            "nullable": true
+          },
+          "countryOfBirthId": {
+            "type": "integer",
+            "description": "The id to the country the candidate employee was born in.",
+            "format": "int32",
+            "nullable": true
+          },
+          "genderId": {
+            "type": "integer",
+            "description": "The id of the gender of the candidate employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "maritalStatusId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "healthInsurerId": {
+            "type": "integer",
+            "description": "The id to the health insurer of the candidate employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "healthInsuranceNumber": {
+            "type": "string",
+            "description": "The number the candidate employee is insured with at their health insurer.",
+            "nullable": true
+          },
+          "emailAddress": {
+            "type": "string",
+            "description": "The email address of the candidate employee.",
+            "nullable": true
+          },
+          "mobileNumber": {
+            "type": "string",
+            "description": "The mobile phone number of the candidate employee.",
+            "nullable": true
+          },
+          "communicationLanguageId": {
+            "type": "integer",
+            "description": "The preferred language the candidate employee should be communicated with.",
+            "format": "int32",
+            "nullable": true
+          },
+          "generalPractitionerId": {
+            "type": "integer",
+            "description": "The id of the general practitioner of the candidate employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "personalHousing": {
+            "type": "boolean",
+            "description": "Whether or not the candidate employee has their own residence within the Netherlands."
+          },
+          "usesOwnTransportation": {
+            "type": "boolean"
+          },
+          "comment": {
+            "type": "string",
+            "description": "An optional comment about the candidate employee.",
+            "nullable": true
+          },
+          "statusId": {
+            "type": "integer",
+            "description": "The id to the current status of the candidate employee, for example \"active\", \"inactive\", or \"candidate\".",
+            "format": "int32",
+            "nullable": true
+          },
+          "recruiterId": {
+            "type": "integer",
+            "description": "The id to the recruiter that recruited the candidate employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "idDocumentNumber": {
+            "type": "string",
+            "description": "The registration number of the identification document (identificationnumber)",
+            "nullable": true
+          },
+          "idDocumentTypeId": {
+            "type": "integer",
+            "description": "The P4F identifier to the kind of identity document the candidate employee uses to identify themselves.",
+            "format": "int32",
+            "nullable": true
+          },
+          "idDocumentValidUntil": {
+            "type": "string",
+            "description": "The inclusive end date for the employee's Identification document.",
+            "format": "date",
+            "nullable": true
+          },
+          "bsn": {
+            "type": "string",
+            "description": "The Dutch social security number of this employee.",
+            "nullable": true
+          },
+          "hasDriversLicense": {
+            "type": "boolean",
+            "description": "Whether or not the candidate employee has a drivers license."
+          },
+          "driversLicenseValidUntil": {
+            "type": "string",
+            "description": "The date the drivers license of the candidate employee expires.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "nationalityId": {
+            "type": "integer",
+            "description": "The id to the primary nationality the candidate employee has.",
+            "format": "int32",
+            "nullable": true
+          },
+          "fiscalResidenceId": {
+            "type": "integer",
+            "description": "The id to the country where the candidate employee is taxed.",
+            "format": "int32",
+            "nullable": true
+          },
+          "registrationDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "addressAbroad": {
+            "$ref": "#/components/schemas/Address"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Employment.CreateEmployeeWithAddress": {
+        "required": [
+          "firstName",
+          "lastName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The Plan4Flex primary key Id of the database entity",
+            "format": "int32",
+            "readOnly": true
+          },
+          "ouId": {
+            "type": "integer",
+            "description": "The unique identifier of the organization unit the employee belongs to.",
+            "format": "int32",
+            "nullable": true
+          },
+          "internalSalaryNumber": {
+            "type": "string",
+            "description": "This is the \"Loonnummer\", an identifier commonly generated by the system, that can be unique per OU, and can be manually changed.",
+            "nullable": true
+          },
+          "namePrefix": {
+            "type": "string",
+            "description": "An optional prefix for the last name of the employee, for example \"van der\".",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The last name of the employee.",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "description": "The first name of the employee.",
+            "nullable": true
+          },
+          "genderId": {
+            "type": "integer",
+            "description": "The id of the gender of the employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "initials": {
+            "type": "string",
+            "description": "The initials of the name of the employee.",
+            "nullable": true
+          },
+          "registrationDate": {
+            "type": "string",
+            "description": "The date the employee was registered in the system.",
+            "format": "date",
+            "nullable": true
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "description": "The date the employee was born.",
+            "format": "date"
+          },
+          "cityOfBirth": {
+            "type": "string",
+            "description": "The city or town the employee was born in.",
+            "nullable": true
+          },
+          "countryOfBirthId": {
+            "type": "integer",
+            "description": "The id to the country the employee was born in.",
+            "format": "int32",
+            "nullable": true
+          },
+          "birthName": {
+            "type": "string",
+            "description": "The name the employee was born with.",
+            "nullable": true
+          },
+          "nationalityId": {
+            "type": "integer",
+            "description": "The id to the primary nationality the employee has.",
+            "format": "int32",
+            "nullable": true
+          },
+          "maritalStatusId": {
+            "type": "integer",
+            "description": "The id to the current marital status of the employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "emailAddress": {
+            "type": "string",
+            "description": "The email address of the employee.",
+            "nullable": true
+          },
+          "statusId": {
+            "type": "integer",
+            "description": "The id to the current status of the employee, for example \"active\", \"inactive\", or \"candidate\".",
+            "format": "int32"
+          },
+          "idDocumentTypeId": {
+            "type": "integer",
+            "description": "The P4F identifier to the kind of identity document the employee uses to identify themselves.",
+            "format": "int32",
+            "nullable": true
+          },
+          "addressId": {
+            "type": "integer",
+            "description": "The id to the address in the Netherlands of the employee.",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true
+          },
+          "addressAbroadId": {
+            "type": "integer",
+            "description": "The id to the address abroad of the employee.",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true
+          },
+          "addressAbroadIsDomicile": {
+            "type": "boolean",
+            "description": "Whether or not the address abroad is the permanent address of the employee.",
+            "nullable": true
+          },
+          "personalHousing": {
+            "type": "boolean",
+            "description": "Whether or not the employee has their own residence within the Netherlands."
+          },
+          "mobileNumber": {
+            "type": "string",
+            "description": "The mobile phone number of the employee.",
+            "nullable": true
+          },
+          "hasDriversLicense": {
+            "type": "boolean",
+            "description": "Whether or not the employee has a drivers license."
+          },
+          "usesOwnTransportation": {
+            "type": "boolean",
+            "description": "Whether or not the employee arranges their own transportation."
+          },
+          "driversLicenseValidUntil": {
+            "type": "string",
+            "description": "The date the drivers license of the employee expires.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "recruiterId": {
+            "type": "integer",
+            "description": "The id to the recruiter that recruited the employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "collectiveAgreementId": {
+            "type": "integer",
+            "description": "The id to the collective agreement the employee is part of.",
+            "format": "int32",
+            "nullable": true
+          },
+          "contractTypeId": {
+            "type": "integer",
+            "description": "The id to the contract type of the employee, for example \"temporary\" or \"permanent\".",
+            "format": "int32",
+            "nullable": true
+          },
+          "comment": {
+            "type": "string",
+            "description": "An optional comment about the employee.",
+            "nullable": true
+          },
+          "highestEducationId": {
+            "type": "integer",
+            "description": "The id to the education level of the employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "pickupAddressId": {
+            "type": "integer",
+            "description": "The address the employee should be picked up from, and dropped off at when going to work.",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true
+          },
+          "healthInsurerId": {
+            "type": "integer",
+            "description": "The id to the health insurer of the employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "healthInsuranceNumber": {
+            "type": "string",
+            "description": "The number the employee is insured with at their health insurer.",
+            "nullable": true
+          },
+          "generalPractitionerId": {
+            "type": "integer",
+            "description": "The id of the general practitioner of the employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "communicationLanguageId": {
+            "type": "integer",
+            "description": "The preferred language the employee should be communicated with.",
+            "format": "int32",
+            "nullable": true
+          },
+          "taxationLocationId": {
+            "type": "integer",
+            "description": "The id to the country where the employee is taxed.",
+            "format": "int32",
+            "nullable": true
+          },
+          "nickname": {
+            "type": "string",
+            "description": "The name that should be used when addressing the employee.",
+            "nullable": true
+          },
+          "birthNamePrefix": {
+            "type": "string",
+            "description": "The prefix of the birth name of the employee, for example \"van der\".",
+            "nullable": true
+          },
+          "importId": {
+            "type": "string",
+            "description": "An ID for third parties to identify the employee with.",
+            "nullable": true
+          },
+          "importId2": {
+            "type": "string",
+            "description": "An ID for third parties to identify the employee with.",
+            "nullable": true
+          },
+          "importId3": {
+            "type": "string",
+            "description": "An ID for third parties to identify the employee with.",
+            "nullable": true
+          },
+          "bsn": {
+            "type": "string",
+            "description": "The Dutch social security number of this employee.",
+            "nullable": true
+          },
+          "idDocumentValidUntil": {
+            "type": "string",
+            "description": "The inclusive end date for the employee's Identification document.",
+            "format": "date",
+            "nullable": true
+          },
+          "idDocumentNumber": {
+            "type": "string",
+            "description": "The document number for the employee's Identification document.",
+            "nullable": true
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "addressAbroad": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "pickupAddress": {
+            "$ref": "#/components/schemas/Address"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Employment.EmployeeExtraFields": {
+        "type": "object",
+        "properties": {
+          "textField1": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField2": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField3": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField4": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField5": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField6": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField7": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField8": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField9": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField10": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField11": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField12": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField13": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField14": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField15": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField16": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField17": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField18": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField19": {
+            "type": "string",
+            "nullable": true
+          },
+          "textField20": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "Employment.EmployeeWithAddress": {
+        "required": [
+          "firstName",
+          "lastName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The Plan4Flex primary key Id of the database entity",
+            "format": "int32",
+            "readOnly": true
+          },
+          "ouId": {
+            "type": "integer",
+            "description": "The unique identifier of the organization unit the employee belongs to.",
+            "format": "int32",
+            "nullable": true
+          },
+          "internalSalaryNumber": {
+            "type": "string",
+            "description": "This is the \"Loonnummer\", an identifier commonly generated by the system, that can be unique per OU, and can be manually changed.",
+            "nullable": true
+          },
+          "namePrefix": {
+            "type": "string",
+            "description": "An optional prefix for the last name of the employee, for example \"van der\".",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The last name of the employee.",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "description": "The first name of the employee.",
+            "nullable": true
+          },
+          "genderId": {
+            "type": "integer",
+            "description": "The id of the gender of the employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "initials": {
+            "type": "string",
+            "description": "The initials of the name of the employee.",
+            "nullable": true
+          },
+          "registrationDate": {
+            "type": "string",
+            "description": "The date the employee was registered in the system.",
+            "format": "date",
+            "nullable": true
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "description": "The date the employee was born.",
+            "format": "date"
+          },
+          "cityOfBirth": {
+            "type": "string",
+            "description": "The city or town the employee was born in.",
+            "nullable": true
+          },
+          "countryOfBirthId": {
+            "type": "integer",
+            "description": "The id to the country the employee was born in.",
+            "format": "int32",
+            "nullable": true
+          },
+          "birthName": {
+            "type": "string",
+            "description": "The name the employee was born with.",
+            "nullable": true
+          },
+          "nationalityId": {
+            "type": "integer",
+            "description": "The id to the primary nationality the employee has.",
+            "format": "int32",
+            "nullable": true
+          },
+          "maritalStatusId": {
+            "type": "integer",
+            "description": "The id to the current marital status of the employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "emailAddress": {
+            "type": "string",
+            "description": "The email address of the employee.",
+            "nullable": true
+          },
+          "statusId": {
+            "type": "integer",
+            "description": "The id to the current status of the employee, for example \"active\", \"inactive\", or \"candidate\".",
+            "format": "int32"
+          },
+          "idDocumentTypeId": {
+            "type": "integer",
+            "description": "The P4F identifier to the kind of identity document the employee uses to identify themselves.",
+            "format": "int32",
+            "nullable": true
+          },
+          "addressId": {
+            "type": "integer",
+            "description": "The id to the address in the Netherlands of the employee.",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true
+          },
+          "addressAbroadId": {
+            "type": "integer",
+            "description": "The id to the address abroad of the employee.",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true
+          },
+          "addressAbroadIsDomicile": {
+            "type": "boolean",
+            "description": "Whether or not the address abroad is the permanent address of the employee.",
+            "nullable": true
+          },
+          "personalHousing": {
+            "type": "boolean",
+            "description": "Whether or not the employee has their own residence within the Netherlands."
+          },
+          "mobileNumber": {
+            "type": "string",
+            "description": "The mobile phone number of the employee.",
+            "nullable": true
+          },
+          "hasDriversLicense": {
+            "type": "boolean",
+            "description": "Whether or not the employee has a drivers license."
+          },
+          "usesOwnTransportation": {
+            "type": "boolean",
+            "description": "Whether or not the employee arranges their own transportation."
+          },
+          "driversLicenseValidUntil": {
+            "type": "string",
+            "description": "The date the drivers license of the employee expires.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "recruiterId": {
+            "type": "integer",
+            "description": "The id to the recruiter that recruited the employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "collectiveAgreementId": {
+            "type": "integer",
+            "description": "The id to the collective agreement the employee is part of.",
+            "format": "int32",
+            "nullable": true
+          },
+          "contractTypeId": {
+            "type": "integer",
+            "description": "The id to the contract type of the employee, for example \"temporary\" or \"permanent\".",
+            "format": "int32",
+            "nullable": true
+          },
+          "comment": {
+            "type": "string",
+            "description": "An optional comment about the employee.",
+            "nullable": true
+          },
+          "highestEducationId": {
+            "type": "integer",
+            "description": "The id to the education level of the employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "pickupAddressId": {
+            "type": "integer",
+            "description": "The address the employee should be picked up from, and dropped off at when going to work.",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true
+          },
+          "healthInsurerId": {
+            "type": "integer",
+            "description": "The id to the health insurer of the employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "healthInsuranceNumber": {
+            "type": "string",
+            "description": "The number the employee is insured with at their health insurer.",
+            "nullable": true
+          },
+          "generalPractitionerId": {
+            "type": "integer",
+            "description": "The id of the general practitioner of the employee.",
+            "format": "int32",
+            "nullable": true
+          },
+          "communicationLanguageId": {
+            "type": "integer",
+            "description": "The preferred language the employee should be communicated with.",
+            "format": "int32",
+            "nullable": true
+          },
+          "taxationLocationId": {
+            "type": "integer",
+            "description": "The id to the country where the employee is taxed.",
+            "format": "int32",
+            "nullable": true
+          },
+          "nickname": {
+            "type": "string",
+            "description": "The name that should be used when addressing the employee.",
+            "nullable": true
+          },
+          "birthNamePrefix": {
+            "type": "string",
+            "description": "The prefix of the birth name of the employee, for example \"van der\".",
+            "nullable": true
+          },
+          "importId": {
+            "type": "string",
+            "description": "An ID for third parties to identify the employee with.",
+            "nullable": true
+          },
+          "importId2": {
+            "type": "string",
+            "description": "An ID for third parties to identify the employee with.",
+            "nullable": true
+          },
+          "importId3": {
+            "type": "string",
+            "description": "An ID for third parties to identify the employee with.",
+            "nullable": true
+          },
+          "extraFields": {
+            "$ref": "#/components/schemas/Employment.EmployeeExtraFields"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "addressAbroad": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "pickupAddress": {
+            "$ref": "#/components/schemas/Address"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Employment.RecruiterWithAddress": {
+        "required": [
+          "firstName",
+          "lastName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "genderId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "importCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "recruitmentLocationId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "archived": {
+            "type": "boolean"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Employment.RecruitmentLocationWithAddress": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          },
+          "errors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Errors that occurred during the request",
+            "nullable": true
+          },
+          "trace": {
+            "type": "string",
+            "description": "The trace id of the request, we can use this to trace the request through the system",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { },
+        "description": "The standard error response for the API"
+      },
+      "ExtraField": {
+        "required": [
+          "name",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/ExtraFieldType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExtraFieldType": {
+        "enum": [
+          "Text",
+          "Date"
+        ],
+        "type": "string"
+      },
+      "Hours": {
+        "type": "object",
+        "properties": {
+          "min": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "max": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IdDocumentType": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The P4F identifier for this object",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "description": "The descriptive name of this object",
+            "nullable": true
+          },
+          "importCode": {
+            "type": "string",
+            "description": "??",
+            "nullable": true
+          },
+          "exportCode": {
+            "type": "string",
+            "description": "Contains a value that uniquely identifies this object within an external application/system. This value is used\r\nin communication with that application/system",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A type of identification document, e.g. passport, driver's license, etc."
+      },
+      "JsonPatchDocument<CandidateEmployeeBankAccount>": {
+        "type": "object",
+        "properties": {
+          "operations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Operation<CandidateEmployeeBankAccount>"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "JsonPatchDocument<CandidateEmployeeEducation>": {
+        "type": "object",
+        "properties": {
+          "operations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Operation<CandidateEmployeeEducation>"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "JsonPatchDocument<CandidateEmployeeTrait>": {
+        "type": "object",
+        "properties": {
+          "operations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Operation<CandidateEmployeeTrait>"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "JsonPatchDocument<CandidateEmployeeWorkExperience>": {
+        "type": "object",
+        "properties": {
+          "operations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Operation<CandidateEmployeeWorkExperience>"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "JsonPatchDocument<Contract>": {
+        "type": "object",
+        "properties": {
+          "operations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Operation<Contract>"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "JsonPatchDocument<CreateCandidateEmployee>": {
+        "type": "object",
+        "properties": {
+          "operations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Operation<CreateCandidateEmployee>"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "JsonPatchDocument<UpdateEmployee>": {
+        "type": "object",
+        "properties": {
+          "operations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Operation<UpdateEmployee>"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MaritalStatus": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "exportCode": {
+            "type": "string",
+            "description": "Contains a value that uniquely identifies this object within an external application/system. This value is used\r\nin communication with that application/system",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Operation<CandidateEmployeeBankAccount>": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
+          "op": {
+            "type": "string",
+            "nullable": true
+          },
+          "from": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Operation<CandidateEmployeeEducation>": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
+          "op": {
+            "type": "string",
+            "nullable": true
+          },
+          "from": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Operation<CandidateEmployeeTrait>": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
+          "op": {
+            "type": "string",
+            "nullable": true
+          },
+          "from": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Operation<CandidateEmployeeWorkExperience>": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
+          "op": {
+            "type": "string",
+            "nullable": true
+          },
+          "from": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Operation<Contract>": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
+          "op": {
+            "type": "string",
+            "nullable": true
+          },
+          "from": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Operation<CreateCandidateEmployee>": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
+          "op": {
+            "type": "string",
+            "nullable": true
+          },
+          "from": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Operation<UpdateEmployee>": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
+          "op": {
+            "type": "string",
+            "nullable": true
+          },
+          "from": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PagedResult<Contract>": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Contract"
+            },
+            "description": "The requested data.",
+            "nullable": true
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/PagedResult<Contract>.PaginationInfo"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Default response for paged results."
+      },
+      "PagedResult<Contract>.PaginationInfo": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "description": "The total amount of items that can be paginated over.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information about the pagination."
+      },
+      "PagedResult<Vacancy>": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Vacancy"
+            },
+            "description": "The requested data.",
+            "nullable": true
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/PagedResult<Vacancy>.PaginationInfo"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Default response for paged results."
+      },
+      "PagedResult<Vacancy>.PaginationInfo": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "description": "The total amount of items that can be paginated over.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information about the pagination."
+      },
+      "ParentPlanDtoName": {
+        "enum": [
+          "Position",
+          "Team",
+          "Department",
+          "Branch"
+        ],
+        "type": "string"
+      },
+      "ParentPlanElement": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dtoName": {
+            "$ref": "#/components/schemas/ParentPlanDtoName"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PhoneNumber": {
+        "required": [
+          "kind",
+          "number"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The unique identifier of the PhoneNumber.",
+            "format": "int32",
+            "readOnly": true
+          },
+          "number": {
+            "type": "string",
+            "description": "The telephone number",
+            "nullable": true
+          },
+          "kind": {
+            "type": "string",
+            "description": "The kind of phone number",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the phone",
+            "nullable": true
+          },
+          "importId": {
+            "type": "string",
+            "description": "External ID",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "abstractphone number (for now only linked to an employee by a link table [StandaardWerknemerTelefoonLink])"
+      },
+      "ReasonContractTermination": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The unique identifier of the contract.",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "exportCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "archived": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The reason of a contract termination"
+      },
+      "Requirements": {
+        "required": [
+          "age",
+          "educationClassificationIds",
+          "hours",
+          "salaryIndication"
+        ],
+        "type": "object",
+        "properties": {
+          "fulltime": {
+            "type": "boolean"
+          },
+          "parttime": {
+            "type": "boolean"
+          },
+          "permanentContract": {
+            "type": "boolean"
+          },
+          "fixedTermContract": {
+            "type": "boolean"
+          },
+          "salaryIndication": {
+            "$ref": "#/components/schemas/SalaryIndication"
+          },
+          "age": {
+            "$ref": "#/components/schemas/Age"
+          },
+          "hours": {
+            "$ref": "#/components/schemas/Hours"
+          },
+          "educationClassificationIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SalaryIndication": {
+        "type": "object",
+        "properties": {
+          "min": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "max": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TraitElement": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "groupId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "importId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "archived": {
+            "$ref": "#/components/schemas/ArchivedFlag"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TraitGroup": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "importId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "exact": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TraitValue": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "valueId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "importId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "groupId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Vacancy": {
+        "required": [
+          "desiredTotals",
+          "name",
+          "recruitmentLocationIds"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "customerAssignmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "serialNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "postingDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "closingDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "contactPersonId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "statusId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "workingHours": {
+            "type": "string",
+            "nullable": true
+          },
+          "weeklyHours": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "professionalHourlyWage": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "firstWorkDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "arrivalDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "workDuration": {
+            "type": "string",
+            "nullable": true
+          },
+          "accountManagerId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "desiredTotals": {
+            "$ref": "#/components/schemas/DesiredTotals"
+          },
+          "requirements": {
+            "$ref": "#/components/schemas/Requirements"
+          },
+          "parentPlanElement": {
+            "$ref": "#/components/schemas/ParentPlanElement"
+          },
+          "recruitmentLocationIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "changedAt": {
+            "type": "string",
+            "description": "The UTC date and time when the vacancy was last changed.",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VacancyLinkedCandidate": {
+        "type": "object",
+        "properties": {
+          "vacancyId": {
+            "type": "integer",
+            "description": "The unique identifier of the vacancy.",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "description": "The total amount of linked candidates.",
+            "format": "int32"
+          },
+          "male": {
+            "type": "integer",
+            "description": "The total amount of linked male candidates.",
+            "format": "int32"
+          },
+          "female": {
+            "type": "integer",
+            "description": "The total amount of linked female candidates.",
+            "format": "int32"
+          },
+          "withDriversLicense": {
+            "type": "integer",
+            "description": "The total amount of linked candidates with a driverslicense.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A linked candidate object of a vacancy."
+      },
+      "VacancyProfile": {
+        "required": [
+          "candidateGroupIds"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasBeenEmployedBefore": {
+            "type": "boolean"
+          },
+          "lastVacancyEdit": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastVacancyEditUserId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdByUserId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "candidateGroupIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VacancyStatus": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VacancyTrait": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vacancyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "elementId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "valueId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "The authorization header. This should be passed with value \"bearer &lt;token&gt;\". The token can be obtained through the Users Domain. See also the Getting Started page.",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "CandidateEmployeeBankAccount",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.CandidateEmployeeBankAccount."
+    },
+    {
+      "name": "CandidateEmployee",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.CandidateEmployee."
+    },
+    {
+      "name": "CandidateEmployeeDocument",
+      "description": "Web controller for P4FService.Grpc.Shared.CommonDtos.Document specificly for Data.Employment.Grpc.Interface.Dto.CandidateEmployee."
+    },
+    {
+      "name": "CandidateEmployeeEducation",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.CandidateEmployeeEducation."
+    },
+    {
+      "name": "CandidateEmployeeStatus",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.CandidateEmployeeStatus."
+    },
+    {
+      "name": "CandidateEmployeeTrait",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.CandidateEmployeeTrait."
+    },
+    {
+      "name": "CandidateEmployeeWorkExperience",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.CandidateEmployeeWorkExperience."
+    },
+    {
+      "name": "CaoRisicogroup",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.CaoRisicogroup."
+    },
+    {
+      "name": "Contract",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.Employee."
+    },
+    {
+      "name": "ContractTypes",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.ContractType."
+    },
+    {
+      "name": "EmployeeBankAccounts",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.EmployeeBankAccount."
+    },
+    {
+      "name": "Employee",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.Employee."
+    },
+    {
+      "name": "EmployeeIncomeGuarantee",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.EmployeeIncomeGuarantee."
+    },
+    {
+      "name": "EmployeePhoneNumbers",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.Employee."
+    },
+    {
+      "name": "EmployeeStatus",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.EmployeeStatus."
+    },
+    {
+      "name": "IdDocumentType",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.IdDocumentType."
+    },
+    {
+      "name": "MaritalStatus",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.MaritalStatus."
+    },
+    {
+      "name": "ReasonContractTermination",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.ReasonContractTermination."
+    },
+    {
+      "name": "Recruiter",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.Recruiter."
+    },
+    {
+      "name": "RecruitmentLocation",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.RecruitmentLocation."
+    },
+    {
+      "name": "TraitValue",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.TraitValue."
+    },
+    {
+      "name": "TraitElement",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.TraitElement."
+    },
+    {
+      "name": "TraitGroup",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.TraitGroup."
+    },
+    {
+      "name": "Vacancy",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.VacancyLinkedCandidate.\r\nWeb controller for Data.Employment.Grpc.Interface.Dto.VacancyTrait.\r\nWeb controller for Data.Employment.Grpc.Interface.Dto.Vacancy."
+    },
+    {
+      "name": "VacancyStatus",
+      "description": "Web controller for Data.Employment.Grpc.Interface.Dto.VacancyStatus."
+    }
+  ]
+}
